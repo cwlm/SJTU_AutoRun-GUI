@@ -1,1 +1,1 @@
-streamlit run Hello.py
+streamlit run SJTU_AutoRun_GUI.py
