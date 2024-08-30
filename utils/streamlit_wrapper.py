@@ -58,15 +58,14 @@ def multiselect(label, options, dic_or_list, key_or_index, tag='', **kwargs):
     return st.multiselect(label, options, default_value, key=st_key, on_change=callback_fn, **kwargs)
 
 
-def slider(label, dic_or_list, key_or_index, tag='', min=0.0, max=100.0, step=0.1, **kwargs):
+def slider(label, dic_or_list, key_or_index, tag='', min_value=0.0, max_value=100.0, step=0.1, **kwargs):
     st_key = label + str(tag)
     try:
         default_value = dic_or_list[key_or_index]
     except KeyError:
         default_value = (0, 100)
-    st_key = label + str(tag)
     callback_fn = value_assign(dic_or_list, key_or_index, st_key)
-    return st.slider(label, min, max, default_value, step, key=st_key, on_change=callback_fn, **kwargs)
+    return st.slider(label, min_value, max_value, default_value, step, key=st_key, on_change=callback_fn, **kwargs)
 
 
 def checkbox(label, dic_or_list, key_or_index, tag='', **kwargs):
