@@ -2,6 +2,7 @@
 log/
 tmp/
 tests/
+data/
 .vscode/
 system_test.py
 
