@@ -7,7 +7,7 @@ def value_assign(dic_or_list, key_or_index, st_key):
         value = st.session_state[st_key]
         try:
             value = eval(value)
-        except KeyError:
+        except TypeError:
             pass
         dic_or_list[key_or_index] = value
 
