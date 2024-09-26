@@ -1,9 +1,9 @@
-import streamlit as st
 import yaml
 import os
 import shutil
-import copy
 from utils.streamlit_wrapper import *
+import streamlit as st
+import pandas as pd
 
 st.set_page_config(
     page_title="设置",
@@ -69,6 +69,7 @@ config, all_plans = load_data()
 with st.expander("模拟器设置", False):
     c = config["emulator"]
     text_input("模拟器路径", c, "emulator_dir")
+    text_input("模拟器id（多开器请填写，默认为0）", c, "emulator_index")
 
 # with st.expander("自定义舰船名称", False):
 #     st.text("暂未实现GUI，请在data/ship_names.yaml中修改")
@@ -76,7 +77,7 @@ with st.expander("模拟器设置", False):
 with st.expander("跑步计划库", False):
     with st.container():
         plan_name = st.selectbox("选择方案",
-                                 [key for key in all_plans.keys() if key != "default"])
+                                 [key for key in all_plans.keys()])
         plan = all_plans[f"{plan_name}"]
         tabs = st.tabs(["配速", "模式", "距离"])
         with tabs[0]:
