@@ -1,6 +1,7 @@
 speed: [3.4, 3.6]
 mode: circular
 locating_error: 5
+distance: 4000 # 跑步距离
 points:
   - [121.423808, 31.021735]
   - [121.424208, 31.020826]
