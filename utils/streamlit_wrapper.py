@@ -88,17 +88,17 @@ def text_input(label, dic_or_list, key_or_index, tag='', **kwargs):
     return st.text_input(label, default_value, key=st_key, on_change=callback_fn, **kwargs)
 
 
-def rename_text_input(label, father_dic, father_key, prefix='', tag='', **kwargs):
-    def item_rename(father_dict, father_key, prefix, st_key):
+def rename_text_input(label, father_dict, father_key, prefix='', tag='', **kwargs):
+    def item_rename(father_dict_, father_key_, prefix_, st_key_):
         def rename():
-            new_key = prefix + st.session_state[st_key]
-            father_dict[new_key] = father_dict.pop(prefix + father_key)
-            st.session_state[st_key] = ''
+            new_key = prefix_ + st.session_state[st_key_]
+            father_dict_[new_key] = father_dict_.pop(prefix_ + father_key_)
+            st.session_state[st_key_] = ''
 
         return rename
 
     st_key = label + str(tag)
-    callback_fn = item_rename(father_dic, father_key, prefix, st_key)
+    callback_fn = item_rename(father_dict, father_key, prefix, st_key)
     return st.text_input(label, key=st_key, on_change=callback_fn, **kwargs)
 
 

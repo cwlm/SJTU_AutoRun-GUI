@@ -12,7 +12,7 @@ st.set_page_config(
 st.write("# 修改设置 ⚙️")
 st.info("用户设置全部在data/下，不想用GUI可以直接改文件", icon="ℹ️")
 st.info("修改设置后，为保证稳定建议重启GUI再执行挂机等功能", icon="ℹ️")
-st.error("所有修改实时保存，不能撤回！测试版bug颇多，保险起见建议经常备份data/文件夹！", icon="🚨")
+st.warning("所有修改实时保存，不能撤回！测试版bug颇多，保险起见建议经常备份data/文件夹！", icon="🚨")
 st.warning("如果GUI崩溃，请关闭GUI并手动修改文件来尝试恢复，并反馈bug", icon="🚨")
 
 
