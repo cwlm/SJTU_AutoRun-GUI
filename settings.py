@@ -68,11 +68,8 @@ config, all_plans = load_data()
 # 修改设置
 with st.expander("模拟器设置", False):
     c = config["emulator"]
-    text_input("模拟器路径", c, "emulator_dir")
+    text_input("模拟器路径（留空则会自动从注册表读取）", c, "emulator_dir")
     text_input("模拟器id（多开器请填写，默认为0）", c, "emulator_index")
-
-# with st.expander("自定义舰船名称", False):
-#     st.text("暂未实现GUI，请在data/ship_names.yaml中修改")
 
 with st.expander("跑步计划库", False):
     with st.container():
