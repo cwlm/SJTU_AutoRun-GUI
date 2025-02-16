@@ -3,7 +3,7 @@ emulator:
   emulator_index: 0
 
 DELAY: 1.5
-PLAN_ROOT:
+PLAN_ROOT: "data/plans"
 plan: "default"
 
 # ========== Logger设置 ==========

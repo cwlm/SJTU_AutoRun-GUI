@@ -18,8 +18,6 @@ st.markdown(readme)
 
 if st.button("开始运行"):
     st.balloons()
-    # 指定采用本地设置
-
     timer = start_script("data/user_settings.yaml")
     run_plan = RunPlan(timer)
     run_plan.start_run()
