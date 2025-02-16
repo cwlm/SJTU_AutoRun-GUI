@@ -69,7 +69,7 @@ config, all_plans = load_data()
 with st.expander("模拟器设置", False):
     c = config["emulator"]
     text_input("模拟器路径（留空则会自动从注册表读取）", c, "emulator_dir")
-    text_input("模拟器id（多开器请填写，默认为0）", c, "emulator_index")
+    number_input("模拟器id（多开器请填写，默认为0）", c, "emulator_index")
 
 with st.expander("跑步计划库", False):
     with st.container():
