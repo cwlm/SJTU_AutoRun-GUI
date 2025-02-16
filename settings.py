@@ -67,14 +67,13 @@ config, all_plans = load_data()
 
 # 修改设置
 with st.expander("模拟器设置", False):
-    c = config["emulator"]
-    text_input("模拟器路径（留空则会自动从注册表读取）", c, "emulator_dir")
-    number_input("模拟器id（多开器请填写，默认为0）", c, "emulator_index")
+    conf = config["emulator"]
+    text_input("模拟器路径（留空则会自动从注册表读取）", conf, "emulator_dir")
+    number_input("模拟器id（多开器请填写，默认为0）", conf, "emulator_index")
 
 with st.expander("跑步计划库", False):
     with st.container():
-        plan_name = st.selectbox("选择方案",
-                                 [key for key in all_plans.keys()])
+        plan_name = selectbox("选择计划", list(all_plans.keys()), conf, "plan")
         plan = all_plans[f"{plan_name}"]
         tabs = st.tabs(["配速", "模式", "距离"])
         with tabs[0]:

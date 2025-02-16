@@ -1,51 +1,20 @@
 import streamlit as st
+import pandas as pd
+from ast import literal_eval
 
 
 # 统一 字典、列表 的修改方式
 def value_assign(dic_or_list, key_or_index, st_key):
     def assign():
-        value = st.session_state[st_key]
-        try:
-            value = eval(value)
-        except TypeError:
-            pass
-        dic_or_list[key_or_index] = value
-
+        dic_or_list[key_or_index] = st.session_state[st_key]
     return assign
-
-
-# TODO：检查是否都是 1-based index
-def index_assign(options, dic_or_list, key_or_index, st_key):
-    def assign():
-        value = st.session_state[st_key]
-        try:
-            value = eval(value)
-        except KeyError:
-            pass
-        dic_or_list[key_or_index] = options.index(value) + 1
-
-    return assign
-
 
 # ==================== 以下为封装的 streamlit 组件 ====================
-def selectbox(label, options, dic_or_list, key_or_index, tag='', option_to_index=False, **kwargs):
+def selectbox(label, options, dic, key, tag='', **kwargs):
     st_key = label + str(tag)
-    try:
-        default_value = dic_or_list[key_or_index]
-    except KeyError:
-        default_value = 1 if option_to_index else options[0]
-
-    # 可以设置None来表示默认值
-    if default_value is None:
-        default_value = 1 if option_to_index else options[0]
-
-    if option_to_index:  # 默认值是索引
-        default_value -= 1  # TODO：检查是否都是 1-based index
-        callback_fn = index_assign(options, dic_or_list, key_or_index, st_key)
-        return st.selectbox(label, options, default_value, key=st_key, on_change=callback_fn, **kwargs)
-    else:  # 默认值就是选项
-        callback_fn = value_assign(dic_or_list, key_or_index, st_key)
-        return st.selectbox(label, options, options.index(default_value), key=st_key, on_change=callback_fn, **kwargs)
+    default_value = dic[key]
+    callback_fn = value_assign(dic, key, st_key)
+    return st.selectbox(label, options, options.index(default_value), key=st_key, on_change=callback_fn, **kwargs)
 
 
 def multiselect(label, options, dic_or_list, key_or_index, tag='', **kwargs):
