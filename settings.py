@@ -1,9 +1,9 @@
-import streamlit as st
 import yaml
 import os
 import shutil
-import copy
 from utils.streamlit_wrapper import *
+import streamlit as st
+import pandas as pd
 
 st.set_page_config(
     page_title="设置",
@@ -12,7 +12,7 @@ st.set_page_config(
 st.write("# 修改设置 ⚙️")
 st.info("用户设置全部在data/下，不想用GUI可以直接改文件", icon="ℹ️")
 st.info("修改设置后，为保证稳定建议重启GUI再执行挂机等功能", icon="ℹ️")
-st.error("所有修改实时保存，不能撤回！测试版bug颇多，保险起见建议经常备份data/文件夹！", icon="🚨")
+st.warning("所有修改实时保存，不能撤回！测试版bug颇多，保险起见建议经常备份data/文件夹！", icon="🚨")
 st.warning("如果GUI崩溃，请关闭GUI并手动修改文件来尝试恢复，并反馈bug", icon="🚨")
 
 
@@ -67,16 +67,13 @@ config, all_plans = load_data()
 
 # 修改设置
 with st.expander("模拟器设置", False):
-    c = config["emulator"]
-    text_input("模拟器路径", c, "emulator_dir")
-
-# with st.expander("自定义舰船名称", False):
-#     st.text("暂未实现GUI，请在data/ship_names.yaml中修改")
+    emulator_conf = config["emulator"]
+    text_input("模拟器路径（留空则会自动从注册表读取）", emulator_conf, "emulator_dir")
+    number_input("模拟器id（多开器请填写，默认为0）", emulator_conf, "emulator_index")
 
 with st.expander("跑步计划库", False):
     with st.container():
-        plan_name = st.selectbox("选择方案",
-                                 [key for key in all_plans.keys() if key != "default"])
+        plan_name = selectbox("选择计划", list(all_plans.keys()), config, "plan")
         plan = all_plans[f"{plan_name}"]
         tabs = st.tabs(["配速", "模式", "距离"])
         with tabs[0]:
