@@ -8,7 +8,7 @@
 
 1. 安装后端
 
-    详见[后端使用方法](https://github.com/cwlm/SJTU_AutoRun/documents/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.md#%E5%AE%89%E8%A3%85)
+    详见[后端使用方法](https://github.com/cwlm/SJTU_AutoRun/tree/main/documents/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.md#%E5%AE%89%E8%A3%85)
 
 2. 安装streamlit
 
