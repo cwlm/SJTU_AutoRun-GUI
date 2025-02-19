@@ -1,1 +1,0 @@
-streamlit run SJTU_AutoRun_GUI.py

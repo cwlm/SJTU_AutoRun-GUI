@@ -1,0 +1,1 @@
+streamlit run "$PSScriptRoot\SJTU_AutoRun_GUI.py"
