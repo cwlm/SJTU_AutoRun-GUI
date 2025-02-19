@@ -82,5 +82,7 @@ with st.expander("跑步计划库", False):
             selectbox("模式", ["single_trip", "back_and_forth", "circular"], plan, "mode")
         with tabs[2]:
             text_input("距离", plan, "distance")
+    with st.container():
+        editable_table("点位", plan, "points")
 
 save_data(config, all_plans)

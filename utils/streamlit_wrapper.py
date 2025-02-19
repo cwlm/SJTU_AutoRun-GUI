@@ -1,13 +1,24 @@
 import streamlit as st
 import pandas as pd
-from ast import literal_eval
 
 
 # 统一 字典、列表 的修改方式
 def value_assign(dic_or_list, key_or_index, st_key):
     def assign():
         dic_or_list[key_or_index] = st.session_state[st_key]
+
     return assign
+
+
+def value_assign_df(dic_or_list, key_or_index, st_key):
+    def assign():
+        try:
+            dic_or_list[key_or_index] = st.session_state[st_key].to_array()
+        except ValueError:
+            pass
+
+    return assign
+
 
 # ==================== 以下为封装的 streamlit 组件 ====================
 def selectbox(label, options, dic, key, tag='', **kwargs):
@@ -120,3 +131,10 @@ def move_up_button(label, father_list, index, tag='', **kwargs):
     callback_fn = item_move_up(father_list, index)
 
     return st.button(label, key=st_key, on_click=callback_fn, **kwargs)
+
+
+def editable_table(label, dict_, key, tag=''):
+    st_key = label + str(tag)
+    df = pd.DataFrame(dict_[key])
+    edited_df = st.data_editor(df, key=label + str(tag), num_rows="dynamic")
+    dict_[key] = edited_df.to_numpy().tolist()
